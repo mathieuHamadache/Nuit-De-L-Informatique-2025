@@ -23,7 +23,7 @@ assets.logo.src = "assets/Logo.png";
 
 for(let i=1; i<=5; i++) {
     let img = new Image();
-    img.src = `assets/Objet_template/Maison${i}.png`;
+    img.src = `assets/objets_template/maison${i}.png`;
     assets.maisons.push(img);
 }
 
