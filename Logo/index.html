@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎥 Le Cinéma de Noël - Logo Nuit Info</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, .christmas-font { font-family: 'Mountains of Christmas', cursive; }
+
+        /* --- NEIGE --- */
+        .snowflake {
+            position: absolute; top: -10px; color: #fff; text-shadow: 0 0 5px #000;
+            animation: fall linear forwards; z-index: 1; pointer-events: none;
+        }
+        @keyframes fall { to { transform: translateY(105vh); } }
+
+        /* --- GUIRLANDE --- */
+        .light-rope {
+            text-align: center; white-space: nowrap; overflow: hidden;
+            position: absolute; z-index: 10; margin: -15px 0 0 0; padding: 0; pointer-events: none; width: 100%;
+        }
+        .light {
+            display: inline-block; width: 12px; height: 28px; border-radius: 50%; margin: 20px;
+            background: #00f7a5; box-shadow: 0px 5px 24px 3px #00f7a5;
+            animation: flash 2s infinite alternate;
+        }
+        .light:nth-child(2n) { background: #00ffff; box-shadow: 0px 5px 24px 3px #00ffff; animation-delay: 0.5s; }
+        .light:nth-child(3n) { background: #f70094; box-shadow: 0px 5px 24px 3px #f70094; animation-delay: 1s; }
+        .light:nth-child(4n) { background: #ffff00; box-shadow: 0px 5px 24px 3px #ffff00; animation-delay: 1.5s; }
+        @keyframes flash { 0%, 100% { opacity: 1; transform: scale(1.2); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        /* --- CONTAINER VIDÉO (Style Carte) --- */
+        .video-card {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.2); /* Lueur violette */
+            transition: all 0.4s ease;
+        }
+        .video-card:hover {
+            border-color: #a78bfa;
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.4);
+        }
+
+        /* --- UTILS --- */
+        .text-glow { text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(168, 85, 247, 0.5); }
+    </style>
+</head>
+<body class="flex flex-col relative">
+
+    <a href="../index.html" class="fixed top-8 left-8 z-50 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full backdrop-blur border border-white/20 transition-all hover:-translate-x-1 flex items-center gap-2 group">
+        <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+        <span class="christmas-font text-xl font-bold">Retour</span>
+    </a>
+
+    <ul class="light-rope">
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+    </ul>
+
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <header class="text-center pt-24 pb-8 z-10 relative">
+        <div class="text-6xl mb-4 animate-pulse">🎬</div>
+        <h1 class="text-5xl md:text-7xl font-bold text-white text-glow mb-2">Projection Spéciale</h1>
+        <p class="text-xl text-purple-200 font-bold">Logo Nuit de l'Info</p>
+    </header>
+
+    <main class="flex-1 container mx-auto px-4 pb-20 z-10 relative flex justify-center items-center">
+        
+        <div class="video-card rounded-3xl p-4 md:p-8 w-full max-w-5xl">
+            <div class="relative w-full rounded-2xl overflow-hidden bg-black/50 shadow-2xl border border-white/10 group">
+                
+                <video controls autoplay loop class="w-full h-auto rounded-2xl shadow-lg">
+                    <source src="logoNuitInfo.mp4" type="video/mp4">
+                    
+                    <div class="p-10 text-center">
+                        <p class="text-red-400 font-bold">Votre navigateur ne supporte pas la balise vidéo.</p>
+                        <a href="logoNuitInfo.mp4" class="underline text-blue-300">Télécharger la vidéo</a>
+                    </div>
+                </video>
+
+            </div>
+
+            <div class="mt-6 text-center">
+                <div class="inline-flex items-center gap-2 text-purple-300 mb-2">
+                    <i class="fas fa-film"></i>
+                    <span class="uppercase tracking-widest text-xs font-bold">Format MP4</span>
+                </div>
+                <p class="text-gray-300 text-sm md:text-base max-w-2xl mx-auto">
+                    Voici l'animation du logo pour la Nuit de l'Info. Installez-vous confortablement, prenez un chocolat chaud et profitez du spectacle ! 🍿
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 text-slate-500 text-sm z-10 relative">
+        <p>Propulsé par la magie de Noël 🎄</p>
+    </footer>
+
+    <script>
+        function createSnowflake() {
+            const snow = document.createElement('div');
+            snow.classList.add('snowflake');
+            snow.innerText = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+            snow.style.left = Math.random() * 100 + 'vw';
+            snow.style.opacity = Math.random();
+            snow.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            
+            const duration = Math.random() * 5 + 5;
+            snow.style.animationDuration = duration + 's';
+
+            document.getElementById('snow-container').appendChild(snow);
+
+            setTimeout(() => { snow.remove(); }, duration * 1000);
+        }
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>

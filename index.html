@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Le Workshop du Codeur de Noël 🎄</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, .christmas-font { font-family: 'Mountains of Christmas', cursive; }
+
+        /* --- NEIGE --- */
+        .snowflake {
+            position: absolute; top: -10px; color: #fff; text-shadow: 0 0 5px #000;
+            animation: fall linear forwards; z-index: 1; pointer-events: none;
+        }
+        @keyframes fall { to { transform: translateY(105vh); } }
+
+        /* --- GUIRLANDE --- */
+        .light-rope {
+            text-align: center; white-space: nowrap; overflow: hidden;
+            position: absolute; z-index: 10; margin: -15px 0 0 0; padding: 0; pointer-events: none; width: 100%;
+        }
+        .light {
+            display: inline-block; width: 12px; height: 28px; border-radius: 50%; margin: 20px;
+            background: #00f7a5; box-shadow: 0px 5px 24px 3px #00f7a5;
+            animation: flash 2s infinite alternate;
+        }
+        .light:nth-child(2n) { background: #00ffff; box-shadow: 0px 5px 24px 3px #00ffff; animation-delay: 0.5s; }
+        .light:nth-child(3n) { background: #f70094; box-shadow: 0px 5px 24px 3px #f70094; animation-delay: 1s; }
+        .light:nth-child(4n) { background: #ffff00; box-shadow: 0px 5px 24px 3px #ffff00; animation-delay: 1.5s; }
+        @keyframes flash { 0%, 100% { opacity: 1; transform: scale(1.2); } 50% { opacity: 0.5; transform: scale(0.8); } }
+
+        /* --- CARTES --- */
+        .hub-card {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        /* L'effet hover s'applique maintenant quand on survole la DIV */
+        .hub-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        }
+        
+        /* --- UTILS --- */
+        .text-glow { text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,0,0,0.5); }
+    </style>
+</head>
+<body class="flex flex-col relative">
+
+    <a href="Snake_Grinch/index.html" class="fixed -bottom-8 -right-4 w-[120px] hover:w-[140px] transition-all duration-500 z-50 cursor-pointer opacity-90 hover:opacity-100 hover:-translate-y-10 hover:rotate-3 group" title="Clique si tu l'oses...">
+
+        <div class="absolute top-6 right-full mr-2 bg-white text-black text-sm font-bold px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-2xl whitespace-nowrap border-2 border-green-600 transform -rotate-6 z-50">
+            JE DÉTESTE NOËL !!! 🐍
+        </div>
+        <img src="grinch.png" alt="Easter Egg Grinch" class="w-full drop-shadow-[0_0_40px_rgba(0,255,0,0.5)]">
+    </a>
+
+    <ul class="light-rope">
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+        <li class="light"></li><li class="light"></li><li class="light"></li><li class="light"></li>
+    </ul>
+
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <header class="text-center pt-20 pb-10 z-10 relative">
+        <div class="text-6xl mb-4 animate-bounce">🎅</div>
+        <h1 class="text-6xl md:text-8xl font-bold text-white text-glow mb-2">Le Hub de Noël</h1>
+        <p class="text-xl text-blue-200 font-bold">Choisissez votre cadeau numérique !</p>
+    </header>
+
+    <main class="flex-1 container mx-auto px-4 pb-20 z-10 relative">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+            <div class="hub-card rounded-3xl p-6 flex flex-col items-center text-center group relative">
+                <div class="w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-4xl mb-4 shadow-lg group-hover:rotate-12 transition-transform">
+                    🛡️
+                </div>
+                <h2 class="text-3xl font-bold text-blue-300 mb-2">Mission NIRD</h2>
+                <p class="text-sm text-gray-300">Sauvez le lycée des GAFAM ! Gérez le budget et installez Linux.</p>
+                <div class="flex flex-row gap-3 mt-4 z-20">
+                    <a href="mission.html" class="px-4 py-2 bg-blue-600 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-blue-500 text-white transition-colors">Jouer</a>
+                    <a href="https://github.com/mathieuHamadache/Projet-NIRD" target="_blank" class="px-4 py-2 bg-gray-700 border border-gray-500 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-gray-600 text-white transition-colors flex items-center">
+                        <i class="fab fa-github mr-2"></i> Repo Git
+                    </a>
+                </div>
+            </div>
+
+            <div class="hub-card rounded-3xl p-6 flex flex-col items-center text-center group relative">
+                <div class="w-24 h-24 rounded-full bg-blue-800 flex items-center justify-center text-4xl mb-4 shadow-lg group-hover:-translate-y-2 transition-transform">
+                    🎿
+                </div>
+                <h2 class="text-3xl font-bold text-white mb-2 bg-blue-700 px-2 rotate-1">DECATHLON Coach</h2>
+                <p class="text-sm text-gray-300">À fond la forme (du Père Noël). Entraînement sportif polaire.</p>
+                
+                <div class="flex flex-row gap-3 mt-4 z-20">
+                    <a href="Decathlon_Coach/welcome.html" class="px-4 py-2 bg-blue-500 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-blue-400 text-white transition-colors">
+                        Visiter
+                    </a>
+                    <a href="https://github.com/telemoca/nuit_info_2025_decathlon" target="_blank" class="px-4 py-2 bg-gray-700 border border-gray-500 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-gray-600 text-white transition-colors flex items-center">
+                        <i class="fab fa-github mr-2"></i> Repo Git
+                    </a>
+                </div>
+            </div>
+            <a href="Logo/index.html" class="hub-card rounded-3xl p-6 flex flex-col items-center text-center group cursor-pointer">
+                <div class="w-24 h-24 rounded-full bg-purple-600 flex items-center justify-center text-4xl mb-4 shadow-lg group-hover:rotate-[360deg] transition-duration-700">
+                    ✨
+                </div>
+                <h2 class="text-3xl font-bold text-purple-300 mb-2">Logo Magique</h2>
+                <p class="text-sm text-gray-300">Une expérience CSS pure. Hypnotisant et festif.</p>
+                <span class="mt-4 px-4 py-2 bg-purple-600 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-purple-500">Voir</span>
+            </a>
+
+            <a class="hub-card rounded-3xl p-6 flex flex-col items-center text-center group cursor-pointer border-red-500/50">
+                <div class="w-24 h-24 rounded-full bg-red-600 flex items-center justify-center text-4xl mb-4 shadow-lg group-hover:animate-pulse">
+                    🎯
+                </div>
+                <h2 class="text-3xl font-bold text-red-400 mb-2 font-mono">X_NOEL_SCOPE_X</h2>
+                <p class="text-sm text-gray-300">FPS PRO MLG. 360 NoScope sur les lutins rebelles (lancement à part)</p>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-slate-500 text-sm z-10 relative">
+        <p>Nuit De L'Informatique 2025 - Équipe NMRLBDLC (Castres)</p>
+    </footer>
+
+    <script>
+        /* --- GÉNÉRATEUR DE NEIGE --- */
+        function createSnowflake() {
+            const snow = document.createElement('div');
+            snow.classList.add('snowflake');
+            snow.innerText = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+            snow.style.left = Math.random() * 100 + 'vw';
+            snow.style.opacity = Math.random();
+            snow.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            
+            const duration = Math.random() * 5 + 5;
+            snow.style.animationDuration = duration + 's';
+
+            document.getElementById('snow-container').appendChild(snow);
+
+            setTimeout(() => { snow.remove(); }, duration * 1000);
+        }
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DECATHLON | COACH</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,700;1,700&family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="style/style.css" />
+        <link rel="icon" href="src/icon/icon_site.png" />
+    </head>
+
+    <body>
+        <header>
+            <img
+                src="src/logo_decathlon_coach.svg"
+                alt="Decathlon Coach"
+                class="logo-img"
+            />
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="container">
+            <button class="btn-back" id="btnBack" onclick="prevStep()">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                    />
+                </svg>
+                Précédent
+            </button>
+
+            <form id="quizForm">
+                <div class="step active" data-step="1">
+                    <h2>Votre niveau ?</h2>
+                    <p class="subtitle">
+                        Pour adapter l'intensité des exercices.
+                    </p>
+                    <div class="options-grid">
+                        <label>
+                            <input
+                                type="radio"
+                                name="experience"
+                                value="Debutant"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/debut_V.png"
+                                    alt="Je débute / Reprise"
+                                />
+                                <span class="tile-label"
+                                    >Je débute / Reprise</span
+                                >
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="experience"
+                                value="Intermediaire"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/carriere_V.png"
+                                    alt="Intermédiaire"
+                                />
+                                <span class="tile-label">Intermédiaire</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="experience"
+                                value="Avancé"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/personnes_V.png"
+                                    alt="Avancé"
+                                />
+                                <span class="tile-label">Avancé</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <a href="welcome.html" class="btn-restart" id="btnHome" style="display: none;">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+                        </svg>
+                        REVENIR À L'ACCUEIL
+                    </a>
+                </div>
+
+                <div class="step" data-step="2">
+                    <h2>Votre Objectif ?</h2>
+                    <p class="subtitle">
+                        Quel est votre but principal aujourd'hui ?
+                    </p>
+                    <div class="options-grid">
+                        <label>
+                            <input
+                                type="radio"
+                                name="objectif"
+                                value="Perte de poids"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/coeurs_V.png"
+                                    alt="Perte de poids"
+                                />
+                                <span class="tile-label">Perte de poids</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="objectif"
+                                value="Renforcement"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/muscle_V.png"
+                                    alt="Renforcement"
+                                />
+                                <span class="tile-label">Renforcement</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="objectif"
+                                value="Souplesse"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/lotus_V.png"
+                                    alt="Souplesse / Yoga"
+                                />
+                                <span class="tile-label">Bien-Être</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step" data-step="3">
+                    <h2>Sports Pratiqués</h2>
+                    <p class="subtitle">
+                        Sélectionnez tous les sports que vous pratiquez (Choix
+                        multiples).
+                    </p>
+                    <div class="options-grid">
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Crossfit"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/kettlebell_V.png"
+                                    alt="Crossfit"
+                                />
+                                <span class="tile-label">Crossfit</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Cyclisme"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/cyclisme_V.png"
+                                    alt="Cyclisme"
+                                />
+                                <span class="tile-label">Cyclisme</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Musculation"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/gym_V.png"
+                                    alt="Musculation"
+                                />
+                                <span class="tile-label">Musculation</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="SportsAquatiques"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/la-natation_V.png"
+                                    alt="Sports Aquatiques"
+                                />
+                                <span class="tile-label"
+                                    >Sports Aquatiques</span
+                                >
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="SportsRelaxation"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/yoga_V.png"
+                                    alt="Sports de Relaxation"
+                                />
+                                <span class="tile-label"
+                                    >Sports de Relaxation</span
+                                >
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Randonnees"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/randonnee_V.png"
+                                    alt="Randonnées"
+                                />
+                                <span class="tile-label">Randonnées</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="Running"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/fonctionnement_V.png"
+                                    alt="Running"
+                                />
+                                <span class="tile-label">Running</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="SportsCollectifs"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/joueuse-de-football_V.png"
+                                    alt="Sports Collectifs"
+                                />
+                                <span class="tile-label"
+                                    >Sports Collectifs</span
+                                >
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="sports"
+                                value="SportsRaquettes"
+                                class="option-input"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/raquette-de-tennis_V.png"
+                                    alt="Sports de Raquettes"
+                                />
+                                <span class="tile-label"
+                                    >Sports de Raquettes</span
+                                >
+                            </div>
+                        </label>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn-validate"
+                        onclick="nextStep()"
+                    >
+                        Valider mes sports
+                    </button>
+                </div>
+
+                <div class="step" data-step="4">
+                    <h2>Où êtes-vous ?</h2>
+                    <p class="subtitle">On adapte l'espace nécessaire.</p>
+                    <div class="options-grid">
+                        <label>
+                            <input
+                                type="radio"
+                                name="lieu"
+                                value="Maison"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/maison_V.png"
+                                    alt="Maison"
+                                />
+                                <span class="tile-label">Maison</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="lieu"
+                                value="Exterieur"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/parc_V.png"
+                                    alt="Extérieur / Parc"
+                                />
+                                <span class="tile-label">Extérieur / Parc</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="lieu"
+                                value="Salle"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/acrobate_V.png"
+                                    alt="Salle de sport"
+                                />
+                                <span class="tile-label">Salle de sport</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step" data-step="5">
+                    <h2>Équipement ?</h2>
+                    <p class="subtitle">Ce dont vous disposez maintenant.</p>
+                    <div class="options-grid">
+                        <label>
+                            <input
+                                type="radio"
+                                name="materiel"
+                                value="Aucun"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/barre-de-traction_V.png"
+                                    alt="Aucun (poids du corps)"
+                                />
+                                <span class="tile-label"
+                                    >Aucun (Poids du corps)</span
+                                >
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="materiel"
+                                value="Basique"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/halteres_V.png"
+                                    alt="Petit matériel"
+                                />
+                                <span class="tile-label">Petit matériel</span>
+                            </div>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="materiel"
+                                value="Complet"
+                                class="option-input"
+                                onclick="nextStep()"
+                            />
+                            <div class="option-tile">
+                                <img
+                                    class="tile-icon"
+                                    src="src/icon/banc-de-presse_V.png"
+                                    alt="Équipement complet"
+                                />
+                                <span class="tile-label"
+                                    >Équipement complet</span
+                                >
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step" data-step="6">
+                    <div class="final-step-content" id="finalStepContent">
+                        <svg
+                            class="loader-icon"
+                            id="loader"
+                            viewBox="0 0 24 24"
+                            style="display: none"
+                        >
+                            <path
+                                d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"
+                            />
+                        </svg>
+
+                        <h2 id="finalTitle">Profil Terminé !</h2>
+                        <p class="subtitle" id="finalSubtitle">
+                            Nous avons toutes les infos pour créer votre séance
+                            sur mesure.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="btn-decathlon"
+                            id="btnGenerate"
+                            onclick="submitForm()"
+                        >
+                            VOIR MON PROGRAMME
+                        </button>
+
+                        <div id="workout-container"></div>
+
+                        <div
+                            id="products-section"
+                            style="display: none; margin-top: 40px"
+                        >
+                            <h3 class="workout-section-title">
+                                Équipez-vous pour cette séance
+                            </h3>
+                            <p class="subtitle" style="margin-bottom: 20px">
+                                Voici le matériel recommandé.
+                            </p>
+                            <div id="products-grid" class="products-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="scroll-indicator" id="scrollIndicator">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+                />
+            </svg>
+        </div>
+
+        <script src="script/app.js"></script>
+    </body>
+</html>

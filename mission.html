@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission NIRD : Le Dernier Bastion (Mode Difficile)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'bounce-short': 'bounce-short 0.5s infinite',
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'bounce-short': {
+                            '0%, 100%': { transform: 'translateY(-10%)', animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)' },
+                            '50%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-color: #0f172a; color: #f1f5f9; overflow: hidden; user-select: none; }
+        h1, h2, h3, button { font-family: 'Fredoka', sans-serif; }
+
+        /* --- SYSTÈME DE SUPERPOSITION --- */
+        
+        #tutorial-mask {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 40;
+            pointer-events: auto;
+            transition: opacity 0.3s;
+        }
+
+        .spotlight-active {
+            position: relative !important; 
+            z-index: 60 !important; 
+            box-shadow: 0 0 0 4px #fbbf24, 0 0 60px rgba(251, 191, 36, 0.8) !important;
+            background-color: #1e293b !important; 
+            border-radius: 16px;
+            pointer-events: auto !important;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+        
+        #stats-container.spotlight-active {
+            position: absolute !important;
+            z-index: 60 !important;
+            background-color: #1e293b !important;
+        }
+
+        #dialog-box { z-index: 70; }
+        #feedback-layer { z-index: 80; }
+        #game-over-modal { z-index: 90; }
+        #event-toast { z-index: 75; }
+
+        /* --- VISUELS JEU --- */
+        .pc-card { transition: all 0.2s; border-width: 3px; }
+        .pc-card:active { transform: scale(0.95); }
+
+        .pc-win { border-color: #64748b; background: linear-gradient(180deg, #334155 0%, #1e293b 100%); }
+        .pc-linux { border-color: #4ade80; background: linear-gradient(180deg, #14532d 0%, #166534 100%); box-shadow: 0 0 15px rgba(74, 222, 128, 0.2); }
+        .pc-broken { border-color: #ef4444; border-style: dashed; background: #450a0a; opacity: 0.9; }
+        .pc-goliath { border-color: #3b82f6; background: linear-gradient(180deg, #1e3a8a 0%, #172554 100%); }
+
+        body.tool-active { cursor: crosshair; }
+
+        .tool-btn.active-tool {
+            border-color: #fbbf24 !important;
+            background-color: #334155 !important;
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px -3px rgba(251, 191, 36, 0.3);
+        }
+
+        .goliath-striped {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);
+            background-size: 200% 100%;
+            animation: moveStripes 2s linear infinite;
+        }
+        @keyframes moveStripes { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+        
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-60px) scale(1.1); } }
+        .float-anim { position: absolute; pointer-events: none; animation: floatUp 1.2s ease-out forwards; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.9); white-space: nowrap; }
+
+        @keyframes slideDown { 0% { transform: translate(-50%, -150%); } 100% { transform: translate(-50%, 20px); } }
+        .event-toast-anim { animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    </style>
+</head>
+<body class="h-screen flex flex-col relative bg-slate-900">
+
+    <div id="tutorial-mask" class="hidden"></div>
+
+    <header id="main-header" class="h-24 bg-slate-900 border-b-4 border-slate-700 flex items-center justify-between px-6 z-30 shadow-xl shrink-0 transition-all">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-2xl shadow-lg border-2 border-blue-400">🛡️</div>
+            <div>
+                <h1 class="font-bold text-2xl leading-none text-blue-100 tracking-wide">Mission NIRD</h1>
+                <div class="text-sm text-blue-400 font-bold tracking-widest uppercase mt-1">Semaine <span id="week-display" class="text-white">1</span> / 40</div>
+            </div>
+        </div>
+
+        <div id="stats-container" class="absolute left-1/2 transform -translate-x-1/2 flex gap-4 bg-slate-800 p-3 rounded-2xl border-2 border-slate-700 shadow-2xl min-w-[500px] justify-center">
+            <div class="flex flex-col items-center justify-center px-4 border-r border-slate-600">
+                <div class="text-[10px] uppercase text-slate-400 font-bold tracking-wider">Budget</div>
+                <div class="text-3xl font-bold text-amber-400 drop-shadow-md" id="budget-display">2500€</div>
+            </div>
+            <div class="flex flex-col items-center justify-center px-4 border-r border-slate-600 w-28" id="morale-block">
+                <div class="text-[10px] uppercase text-slate-400 font-bold tracking-wider">Moral</div>
+                <div class="text-3xl font-bold text-purple-400 drop-shadow-md" id="morale-display">100%</div>
+            </div>
+            <div class="w-56 flex flex-col justify-center px-2" id="goliath-container">
+                <div class="flex justify-between text-[10px] uppercase font-bold mb-1">
+                    <span class="text-slate-400">Menace GAFAM</span>
+                    <span class="text-red-400" id="goliath-val">0%</span>
+                </div>
+                <div class="h-5 bg-slate-900 rounded-full border border-slate-600 overflow-hidden relative shadow-inner">
+                    <div id="goliath-bar" class="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-red-600 goliath-striped w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="next-turn-wrapper">
+            <button onclick="game.nextTurn()" id="btn-next" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded-xl shadow-[0_4px_0_#14532d] active:shadow-none active:translate-y-1 transition-all flex items-center gap-3 text-lg border-2 border-green-400">
+                SEMAINE SUIVANTE <i class="fas fa-forward"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="event-toast" class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-8 py-4 rounded-b-xl shadow-2xl hidden font-bold text-xl border-x-4 border-b-4 border-red-800 flex items-center gap-4">
+        <div class="text-3xl">⚠️</div>
+        <div id="event-msg">ALERTE !</div>
+    </div>
+
+    <main class="flex-1 relative overflow-hidden flex flex-col items-center justify-center p-4 bg-slate-800">
+        <div id="grid-container" class="grid grid-cols-6 gap-4 w-full max-w-5xl relative z-10 p-6 rounded-2xl transition-all"></div>
+    </main>
+
+    <div id="toolbar" class="h-40 bg-slate-900 border-t border-slate-700 flex justify-center items-center gap-6 z-30 relative shadow-[0_-10px_30px_rgba(0,0,0,0.6)] shrink-0 transition-all">
+        <button onclick="game.selectTool('linux')" id="tool-linux" class="tool-btn group relative w-28 h-32 bg-slate-800 border-2 border-slate-600 rounded-2xl flex flex-col items-center justify-center hover:bg-slate-700 transition-all active:scale-95">
+            <div class="text-5xl mb-2 group-hover:animate-bounce-short transition-transform">🐧</div>
+            <div class="text-xs font-bold text-green-400 leading-tight text-center">INSTALLER<br>LINUX</div>
+            <div class="absolute -top-3 -right-2 bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full border border-slate-500 shadow-md">50€</div>
+        </button>
+
+        <button onclick="game.selectTool('repair')" id="tool-repair" class="tool-btn group relative w-28 h-32 bg-slate-800 border-2 border-slate-600 rounded-2xl flex flex-col items-center justify-center hover:bg-slate-700 transition-all active:scale-95">
+            <div class="text-5xl mb-2 group-hover:rotate-12 transition-transform">🔧</div>
+            <div class="text-xs font-bold text-amber-400 leading-tight text-center">RÉPARER<br>(MAINTENANCE)</div>
+            <div class="absolute -top-3 -right-2 bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full border border-slate-500 shadow-md">150€</div>
+        </button>
+
+        <div class="w-px h-20 bg-slate-700 mx-2"></div>
+
+        <button onclick="game.triggerTraining()" id="tool-train" class="tool-btn group relative w-28 h-32 bg-purple-900/20 border-2 border-purple-500/40 rounded-2xl flex flex-col items-center justify-center hover:bg-purple-900/40 transition-all active:scale-95">
+            <div class="text-5xl mb-2 group-hover:scale-110 transition-transform">🎓</div>
+            <div class="text-xs font-bold text-purple-300 leading-tight text-center">FORMER<br>L'ÉQUIPE</div>
+            <div class="absolute -top-3 -right-2 bg-purple-800 text-white text-xs font-bold px-3 py-1 rounded-full border border-purple-500 shadow-md">300€</div>
+        </button>
+
+        <button onclick="game.selectTool('buy')" id="tool-buy" class="tool-btn group relative w-28 h-32 bg-slate-800 border-2 border-slate-600 rounded-2xl flex flex-col items-center justify-center hover:bg-slate-700 transition-all active:scale-95 opacity-70 hover:opacity-100">
+            <div class="text-5xl mb-2 group-hover:translate-x-1 transition-transform">💸</div>
+            <div class="text-xs font-bold text-blue-400 leading-tight text-center">ACHETER<br>NEUF</div>
+            <div class="absolute -top-3 -right-2 bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full border border-slate-500 shadow-md">800€</div>
+        </button>
+    </div>
+
+    <div id="dialog-box" class="hidden fixed bottom-44 left-1/2 transform -translate-x-1/2 w-[90%] max-w-2xl bg-white text-slate-900 p-6 rounded-2xl shadow-2xl border-l-8 border-blue-600 flex gap-6 items-start transition-all">
+        <div class="text-6xl shrink-0">👨‍🏫</div>
+        <div class="flex-1">
+            <h3 class="font-bold text-blue-600 text-xs uppercase mb-1 tracking-wide">LE PROVISEUR</h3>
+            <p id="dialog-text" class="text-xl font-bold leading-snug mb-4 text-slate-800">Message...</p>
+            <div class="flex justify-end">
+                <button onclick="tutorial.next()" id="dialog-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-bold text-sm shadow-lg transform active:scale-95 transition-all flex items-center gap-2">
+                    Compris <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over-modal" class="hidden fixed inset-0 bg-slate-900/95 flex flex-col items-center justify-center p-8 text-center backdrop-blur-md">
+        <div class="text-9xl mb-8 animate-bounce" id="go-icon">🏆</div>
+        <h2 class="text-7xl font-black text-white mb-6 tracking-tight" id="go-title">VICTOIRE !</h2>
+        <p class="text-3xl text-slate-300 mb-12 max-w-2xl leading-relaxed font-semibold" id="go-msg">Le lycée est sauvé !</p>
+        <button onclick="location.reload()" class="bg-green-500 hover:bg-green-400 text-slate-900 text-3xl font-black px-12 py-6 rounded-2xl shadow-[0_0_50px_rgba(34,197,94,0.5)] transform hover:scale-105 transition-all border-4 border-green-300">
+            REJOUER
+        </button>
+    </div>
+
+    <script>
+        const CONFIG = {
+            weeksTotal: 40,
+            pcCount: 18, 
+            startBudget: 2200, // Budget de départ réduit
+            costs: { linux: 50, repair: 150, buy: 800, train: 300 }
+        };
+
+        const tutorial = {
+            step: 0, active: true, blockActions: true, expectedAction: null, 
+            start() { this.step = 0; this.updateStep(); },
+            next() { this.step++; this.updateStep(); },
+            updateStep() {
+                const mask = document.getElementById('tutorial-mask');
+                const dialog = document.getElementById('dialog-box');
+                const txt = document.getElementById('dialog-text');
+                const btn = document.getElementById('dialog-btn');
+                document.querySelectorAll('.spotlight-active').forEach(el => el.classList.remove('spotlight-active'));
+                document.getElementById('toolbar').style.zIndex = "30"; 
+                document.getElementById('main-header').style.zIndex = "30"; 
+
+                switch(this.step) {
+                    case 0:
+                        mask.classList.remove('hidden'); dialog.classList.remove('hidden');
+                        txt.innerText = "Bienvenue, Proviseur ! MODE DIFFICILE ACTIVÉ. La maintenance du parc sera rude.";
+                        this.blockActions = true; btn.style.display = 'flex';
+                        break;
+                    case 1:
+                        txt.innerText = "Votre budget est plus serré. Et attention : même les PC Linux s'usent avec le temps !";
+                        this.highlight('stats-container');
+                        break;
+                    case 2:
+                        txt.innerText = "L'outil 'RÉPARER' est crucial. Il répare les Windows cassés ET fait la maintenance matérielle des Linux.";
+                        this.highlight('tool-repair');
+                        break;
+                    case 3:
+                        txt.innerText = "Cliquez sur PINGOUIN pour commencer à libérer les PC.";
+                        this.highlight('tool-linux'); btn.style.display = 'none'; this.expectedAction = 'selectTool';
+                        break;
+                    case 4:
+                        txt.innerText = "Cliquez sur un PC Windows.";
+                        this.highlight('grid-container'); this.expectedAction = 'clickPC';
+                        break;
+                    case 5:
+                        txt.innerText = "Attention à votre Moral. Formez l'équipe régulièrement !";
+                        this.highlight('morale-block'); btn.style.display = 'flex'; this.expectedAction = null;
+                        break;
+                    case 6:
+                        txt.innerText = "Bonne chance. GAFAM est très agressif cette année.";
+                        this.highlight('btn-next'); this.expectedAction = 'nextTurn';
+                        break;
+                    case 7:
+                        mask.classList.add('hidden'); this.active = false; this.blockActions = false; 
+                        btn.style.display = 'flex'; btn.onclick = () => dialog.classList.add('hidden');
+                        break;
+                }
+            },
+            highlight(id) {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.classList.add('spotlight-active');
+                    if (id.includes('tool')) document.getElementById('toolbar').style.zIndex = "55";
+                    if (id === 'btn-next' || id === 'stats-container' || id === 'morale-block') document.getElementById('main-header').style.zIndex = "55";
+                }
+            }
+        };
+
+        const game = {
+            state: {
+                week: 1, budget: CONFIG.startBudget, morale: 100, goliath: 0,
+                pcs: [], activeTool: null, trainedLevel: 1, gameOver: false
+            },
+
+            init() {
+                const grid = document.getElementById('grid-container');
+                grid.innerHTML = '';
+                this.state.pcs = [];
+                for (let i = 0; i < CONFIG.pcCount; i++) {
+                    const health = 50 + Math.floor(Math.random() * 40); // PC plus usés au départ
+                    const isBroken = Math.random() > 0.80;
+                    this.state.pcs.push({ id: i, type: isBroken ? 'broken' : 'win', health: isBroken ? 0 : health });
+                    const card = document.createElement('div');
+                    card.id = `pc-${i}`;
+                    card.onclick = (e) => { e.stopPropagation(); this.handlePCClick(i); };
+                    grid.appendChild(card);
+                }
+                this.updateUI();
+                tutorial.start();
+            },
+
+            updateUI() {
+                document.getElementById('week-display').innerText = this.state.week;
+                document.getElementById('budget-display').innerText = this.state.budget + "€";
+                document.getElementById('morale-display').innerText = Math.floor(this.state.morale) + "%";
+                document.getElementById('budget-display').className = `text-3xl font-bold drop-shadow-md ${this.state.budget < 500 ? 'text-red-500 animate-pulse' : 'text-amber-400'}`;
+                
+                const gVal = Math.min(100, Math.max(0, Math.floor(this.state.goliath)));
+                document.getElementById('goliath-val').innerText = gVal + "%";
+                const gBar = document.getElementById('goliath-bar');
+                gBar.style.width = gVal + "%";
+                gBar.className = `h-full transition-all duration-500 goliath-striped ${gVal > 80 ? 'bg-red-600' : 'bg-gradient-to-r from-blue-600 via-purple-600 to-red-600'}`;
+
+                document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active-tool'));
+                if (this.state.activeTool) {
+                    document.getElementById(`tool-${this.state.activeTool}`)?.classList.add('active-tool');
+                    document.body.classList.add('tool-active');
+                } else { document.body.classList.remove('tool-active'); }
+
+                this.state.pcs.forEach(pc => {
+                    const el = document.getElementById(`pc-${pc.id}`);
+                    if(!el) return;
+                    el.className = `pc-card h-28 rounded-xl relative flex flex-col items-center justify-center cursor-pointer shadow-lg select-none overflow-hidden`;
+                    
+                    if (pc.type === 'win') {
+                        el.classList.add('pc-win');
+                        let barColor = pc.health > 50 ? 'bg-green-400' : (pc.health > 20 ? 'bg-amber-400' : 'bg-red-500 animate-pulse');
+                        el.innerHTML = `<div class="text-4xl mb-2">💻</div>
+                            <div class="w-16 h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-600"><div class="h-full ${barColor}" style="width: ${pc.health}%"></div></div>
+                            <div class="text-[10px] text-slate-400 mt-1 uppercase font-bold">Obsolescence</div>`;
+                    } else if (pc.type === 'linux') {
+                        el.classList.add('pc-linux');
+                        // Affichage de la santé même pour Linux
+                        let barColor = pc.health > 50 ? 'bg-green-300' : 'bg-red-400';
+                        el.innerHTML = `<div class="text-5xl animate-bounce-short">🐧</div>
+                            <div class="w-12 h-1.5 bg-green-900/50 rounded-full mt-1 overflow-hidden"><div class="h-full ${barColor}" style="width: ${pc.health}%"></div></div>
+                            <div class="text-[9px] text-green-200 font-bold uppercase">Matériel</div>`;
+                    } else if (pc.type === 'broken') {
+                        el.classList.add('pc-broken');
+                        el.innerHTML = `<div class="text-4xl animate-pulse-fast">🔥</div><div class="text-xs text-red-300 font-black mt-1 uppercase">PANNE</div>`;
+                    } else if (pc.type === 'goliath') {
+                        el.classList.add('pc-goliath');
+                        el.innerHTML = `<div class="text-4xl">🤖</div><div class="text-xs text-blue-300 font-bold mt-1">NOUVEAU</div>`;
+                    }
+                });
+            },
+
+            selectTool(tool) {
+                if (tutorial.active && tutorial.blockActions) {
+                    if (tutorial.expectedAction === 'selectTool' && tool === 'linux') {
+                        this.state.activeTool = tool; this.updateUI(); tutorial.next(); return;
+                    } else return;
+                }
+                if (this.state.gameOver) return;
+                this.state.activeTool = (this.state.activeTool === tool) ? null : tool;
+                this.updateUI();
+            },
+
+            handlePCClick(id) {
+                if (tutorial.active && tutorial.blockActions) {
+                    if (tutorial.expectedAction === 'clickPC' && this.state.activeTool) {} else return;
+                }
+                if (this.state.gameOver) return;
+                const pc = this.state.pcs[id];
+                if (!this.state.activeTool) {
+                    this.spawnFeedback(id, "Outil ?", "white"); return;
+                }
+                const cost = CONFIG.costs[this.state.activeTool];
+                if (this.state.budget < cost) {
+                    this.spawnFeedback(id, "Pas de sous !", "red"); return;
+                }
+
+                let success = false; let msg = ""; let color = "white";
+
+                if (this.state.activeTool === 'linux') {
+                    if (pc.type === 'win' || pc.type === 'broken') {
+                        pc.type = 'linux'; pc.health = 100;
+                        this.state.goliath = Math.max(0, this.state.goliath - 5);
+                        success = true; msg = "LIBÉRÉ !"; color = "green";
+                        let penalty = Math.max(0, 5 - (this.state.trainedLevel * 2)); 
+                        if (penalty > 0) { this.state.morale -= penalty; setTimeout(() => this.spawnFeedback(id, `-${penalty}% Moral`, "purple", 40), 600); }
+                    }
+                } else if (this.state.activeTool === 'repair') {
+                    if (pc.type === 'broken') {
+                        pc.type = 'win'; pc.health = 70; // Réparation imparfaite
+                        success = true; msg = "RÉPARÉ"; color = "amber";
+                    } else if (pc.type === 'win' && pc.health < 90) {
+                        pc.health = 100; success = true; msg = "MAINTENANCE"; color = "amber";
+                    } else if (pc.type === 'linux' && pc.health < 90) {
+                        // NOUVEAU : Réparation Linux
+                        pc.health = 100; success = true; msg = "MATÉRIEL OK"; color = "green";
+                    }
+                } else if (this.state.activeTool === 'buy') {
+                    if (pc.type !== 'goliath') {
+                        pc.type = 'goliath'; pc.health = 100;
+                        this.state.goliath += 8; this.state.morale += 5; 
+                        success = true; msg = "NEUF"; color = "blue";
+                    }
+                }
+
+                if (success) {
+                    this.state.budget -= cost; this.spawnFeedback(id, msg, color);
+                    this.updateUI(); this.checkEndGame();
+                    if (tutorial.active && tutorial.expectedAction === 'clickPC') tutorial.next();
+                } else { this.spawnFeedback(id, "Inutile", "gray"); }
+            },
+
+            triggerTraining() {
+                if (tutorial.active && tutorial.blockActions && tutorial.expectedAction !== 'train') return;
+                if (this.state.gameOver) return;
+                if (this.state.budget >= CONFIG.costs.train) {
+                    this.state.budget -= CONFIG.costs.train;
+                    this.state.trainedLevel++;
+                    this.state.morale = Math.min(100, this.state.morale + 30);
+                    this.spawnFeedback('tool-train', "+30% Moral !", "purple");
+                    this.updateUI();
+                    if (tutorial.active && tutorial.expectedAction === 'train') tutorial.next();
+                } else { this.spawnFeedback('tool-train', "Pas assez d'argent", "red"); }
+            },
+
+            nextTurn() {
+                if (tutorial.active && tutorial.blockActions) {
+                    if (tutorial.expectedAction === 'nextTurn') tutorial.next(); else { this.spawnFeedback('btn-next', "Tuto d'abord !", "red"); return; }
+                }
+                if (this.state.gameOver) return;
+
+                this.state.week++;
+                let brokenCount = 0; let winCount = 0; let linuxCount = 0; let goliathCount = 0;
+
+                // EVÉNEMENTS ALÉATOIRES
+                this.triggerRandomEvent();
+
+                this.state.pcs.forEach(pc => {
+                    if (pc.type === 'win') {
+                        winCount++;
+                        let damage = 8 + (this.state.week * 0.3); // Usure Windows accélérée
+                        pc.health -= damage;
+                        if (pc.health <= 0) { pc.type = 'broken'; pc.health = 0; this.spawnFeedback(pc.id, "HS !", "red"); }
+                    } else if (pc.type === 'linux') {
+                        linuxCount++;
+                        // NOUVEAU : Usure matérielle Linux
+                        let hwDamage = 2 + (this.state.week * 0.1); 
+                        // Chance de crash aléatoire
+                        if (Math.random() > 0.98) hwDamage = 100; // Panne sèche rare
+                        
+                        pc.health -= hwDamage;
+                        if (pc.health <= 0) { pc.type = 'broken'; pc.health = 0; this.spawnFeedback(pc.id, "PANNE MATÉRIELLE", "red"); }
+                    } else if (pc.type === 'broken') brokenCount++;
+                    else if (pc.type === 'goliath') goliathCount++;
+                });
+
+                if (brokenCount > 0) this.state.morale -= brokenCount * 2;
+                
+                // Pression Goliath augmentée
+                let change = (winCount * 0.7) + (goliathCount * 0.3) - (linuxCount * 0.4);
+                change += (this.state.week * 0.25); // Augmentation drastique de la difficulté avec le temps
+
+                this.state.goliath = Math.max(0, Math.min(100, this.state.goliath + change));
+                this.state.budget += 100; // REVENU RÉDUIT (C'était 150)
+
+                this.updateUI();
+                this.checkEndGame();
+            },
+
+            triggerRandomEvent() {
+                const rand = Math.random();
+                const msgEl = document.getElementById('event-toast');
+                const txtEl = document.getElementById('event-msg');
+                
+                let eventMsg = "";
+                
+                // Semaine 10 : Audit
+                if (this.state.week === 10) {
+                    this.state.budget -= 300; eventMsg = "AUDIT FINANCIER : -300€";
+                }
+                // Semaine 20 : Canicule
+                else if (this.state.week === 20) {
+                    this.state.pcs.forEach(pc => { if(pc.type !== 'broken') pc.health -= 30; });
+                    eventMsg = "CANICULE : Surchauffe générale !";
+                }
+                // Semaine 30 : Attaque Virale
+                else if (this.state.week === 30) {
+                    let infected = 0;
+                    this.state.pcs.forEach(pc => { 
+                        if(pc.type === 'win') { pc.type = 'broken'; pc.health = 0; infected++; }
+                    });
+                    eventMsg = `RANSOMWARE : ${infected} PC Windows détruits !`;
+                }
+                // Random petit pépin
+                else if (rand > 0.90) {
+                    this.state.budget -= 100; eventMsg = "Augmentation Électricité : -100€";
+                }
+
+                if (eventMsg) {
+                    txtEl.innerText = eventMsg;
+                    msgEl.classList.remove('hidden');
+                    msgEl.classList.add('event-toast-anim');
+                    setTimeout(() => {
+                        msgEl.classList.add('hidden');
+                        msgEl.classList.remove('event-toast-anim');
+                    }, 4000);
+                }
+            },
+
+            checkEndGame() {
+                let over = false; let title = ""; let msg = ""; let win = false;
+                if (this.state.goliath >= 100) { over = true; title = "PRIVATISÉ !"; msg = "L'école a craqué sous la pression GAFAM."; } 
+                else if (this.state.morale <= 0) { over = true; title = "GRÈVE !"; msg = "Les profs ont démissionné."; } 
+                else if (this.state.budget < -600) { over = true; title = "FAILLITE"; msg = "Interdit bancaire."; } 
+                else if (this.state.week >= CONFIG.weeksTotal) { over = true; win = true; title = "VICTOIRE !"; msg = `Vous avez tenu ${CONFIG.weeksTotal} semaines ! Un exploit.`; }
+
+                if (over) {
+                    this.state.gameOver = true;
+                    document.getElementById('game-over-modal').classList.remove('hidden');
+                    document.getElementById('go-title').innerText = title;
+                    document.getElementById('go-msg').innerText = msg;
+                    document.getElementById('go-icon').innerText = win ? "🎉" : "💀";
+                    document.getElementById('go-title').className = win ? "text-7xl font-black text-green-400 mb-6" : "text-7xl font-black text-red-500 mb-6";
+                }
+            },
+
+            spawnFeedback(targetId, text, color, offset=0) {
+                const el = document.getElementById(typeof targetId === 'number' ? `pc-${targetId}` : targetId);
+                if (!el) return;
+                const rect = el.getBoundingClientRect();
+                const div = document.createElement('div');
+                div.innerText = text;
+                div.className = `float-anim text-${color}-400 text-2xl font-black z-[100] stroke-black`;
+                div.style.textShadow = "2px 2px 0px #000";
+                div.style.left = (rect.left + rect.width/2 - 50) + 'px';
+                div.style.top = (rect.top + offset - 20) + 'px';
+                document.body.appendChild(div); 
+                setTimeout(() => div.remove(), 1200);
+            }
+        };
+
+        window.onload = () => game.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+{
+    "categories": [
+        {
+            "id_categorie": "sol_protection",
+            "nom": "Tapis de Protection (Fitness)",
+            "description": "Protection du sol pour charges lourdes et stabilité.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/tapis-de-sol/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8648655",
+                    "nom": "Tapis de protection sol (Dalle Fitness)",
+                    "url": "https://www.decathlon.fr/p/tapis-de-protection-sol-pour-materiel-de-fitness-taille-s-55x55-cm/_/R-p-334184?mc=8648655&c=noir_gris",
+                    "image_path": "src/img/tapis-de-protection-sol-pour-materiel-de-fitness-taille-s-55x55-cm.avif",
+                    "prix": { "valeur": 17.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "cardio", "protection"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "sol_confort",
+            "nom": "Tapis de Yoga & Pilates",
+            "description": "Confort et adhérence pour la pratique au sol.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/yoga/tapis-de-yoga/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8851736",
+                    "nom": "Tapis de Pilates Confort 15mm",
+                    "url": "https://www.decathlon.fr/p/tapis-de-pilates-confort-epaisseur-15-mm-bordeaux/_/R-p-351006?mc=8851736&c=vert",
+                    "image_path": "src/img/tapis-de-pilates-confort-epaisseur-15-mm-vert-clair.avif",
+                    "prix": { "valeur": 20.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "souplesse", "renforcement"]
+                },
+                {
+                    "id": "8785799",
+                    "nom": "Tapis de Yoga Doux 5mm",
+                    "url": "https://www.decathlon.fr/p/tapis-de-yoga-doux-adherence-et-confort-5-mm-vert-fonce-et-beige/_/R-p-344489?mc=8785799&c=beige_bleu",
+                    "image_path": "src/img/tapis-de-yoga-doux-adherence-et-confort-5-mm-vert-fonce.avif",
+                    "prix": { "valeur": 25.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "souplesse"]
+                },
+                {
+                    "id": "8936896",
+                    "nom": "Tapis de Yoga Dynamique 4mm",
+                    "url": "https://www.decathlon.fr/p/tapis-de-yoga-dynamique-ultra-adherent-epaisseur-4-mm-vert/_/R-p-352352?mc=8936896&c=incolore_bleu",
+                    "image_path": "src/img/tapis-de-yoga-dynamique-ultra-adherent-epaisseur-4-mm-vert.avif",
+                    "prix": { "valeur": 35.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "souplesse", "stabilité"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "elastiques",
+            "nom": "Bandes Élastiques",
+            "description": "Résistance progressive pour le renforcement et la mobilité.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/elastique-fitness/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8872877",
+                    "nom": "Pack 3 Élastiques Textiles (Fessiers)",
+                    "url": "https://www.decathlon.fr/p/pack-de-3-elastiques-textiles-pour-fessier-de-fitness/_/R-p-353227?mc=8872877",
+                    "image_path": "src/img/pack-de-3-elastiques-textiles-pour-fessier-de-fitness.avif",
+                    "prix": { "valeur": 15.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "tonification"]
+                },
+                {
+                    "id": "8966621",
+                    "nom": "Kit 3 Training Bands (15/25/35kg)",
+                    "url": "https://www.decathlon.fr/p/kit-3-training-band-elastiques-15-25-35kg-avec-3-mois-offerts-freeletics/_/R-p-373225?mc=8966621&c=bleu_orange_jaune",
+                    "image_path": "src/img/kit-3-training-band-elastiques-bleu-orange-jaune.avif",
+                    "prix": { "valeur": 20.0, "devise": "EUR" },
+                    "tags_objectif": [
+                        "renforcement",
+                        "prise_masse",
+                        "souplesse"
+                    ]
+                }
+            ]
+        },
+        {
+            "id_categorie": "halteres",
+            "nom": "Haltères (Dumbbells)",
+            "description": "La base de la musculation libre.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/halteres-fitness/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8018574",
+                    "nom": "Kit Haltères 20kg",
+                    "url": "https://www.decathlon.fr/p/kit-d-halteres-de-musculation-20-kg-avec-disques-en-fonte-a-80-percent-recyclee/_/R-p-7449?mc=8018574&c=noir",
+                    "image_path": "src/img/kit-d-halteres-de-musculation-20-kg.avif",
+                    "prix": { "valeur": 59.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force", "renforcement"]
+                },
+                {
+                    "id": "8655649",
+                    "nom": "Kit Haltères 50kg",
+                    "url": "https://www.decathlon.fr/p/kit-d-halteres-de-musculation-50-kg-avec-disques-en-fonte-a-80-percent-recyclee/_/R-p-335265?mc=8655649",
+                    "image_path": "src/img/kit-d-halteres-de-musculation-50-kg.avif",
+                    "prix": { "valeur": 149.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "kettlebells",
+            "nom": "Kettlebells",
+            "description": "Pour le cardio, la force et les mouvements balistiques.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/kettlebells/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8354816",
+                    "nom": "Kettlebell 12kg",
+                    "url": "https://www.decathlon.fr/p/kettlebell-en-fonte-et-base-caoutchouc-12-kg-compose-a-80-percent-de-fonte-recyclee/_/R-p-152874?mc=8354816&c=noir_jaune",
+                    "image_path": "src/img/kettlebell-en-fonte-12-kg.avif",
+                    "prix": { "valeur": 35.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "cardio", "force"]
+                },
+                {
+                    "id": "8399332",
+                    "nom": "Kettlebell 6kg",
+                    "url": "https://www.decathlon.fr/p/kettlebell-en-fonte-et-base-caoutchouc-6-kg-compose-a-80-percent-de-fonte-recyclee/_/R-p-182833?mc=8399332&c=noir",
+                    "image_path": "src/img/kettlebell-en-fonte-6-kg.avif",
+                    "prix": { "valeur": 20.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "cardio"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "poids_fontes",
+            "nom": "Barres et Poids (Disques Fonte)",
+            "description": "Option avancée pour charger vos barres.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/poids-fitness/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8816725",
+                    "nom": "Disque Fonte 5kg (28mm)",
+                    "url": "https://www.decathlon.fr/p/disque-de-musculation-fonte-5kg-28mm-compose-a-80-percent-de-fonte-recyclee/_/R-p-348960?mc=8816725",
+                    "image_path": "src/img/disque-de-musculation-fonte-5kg.avif",
+                    "prix": { "valeur": 10.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force"]
+                },
+                {
+                    "id": "8816726",
+                    "nom": "Disque Fonte 10kg (28mm)",
+                    "url": "https://www.decathlon.fr/p/disque-de-musculation-fonte-10kg-28mm-compose-a-80-percent-de-fonte-recyclee/_/R-p-348895?mc=8816726",
+                    "image_path": "src/img/disque-de-musculation-fonte-10kg.avif",
+                    "prix": { "valeur": 20.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force"]
+                },
+                {
+                    "id": "8816727",
+                    "nom": "Disque Fonte 20kg (28mm)",
+                    "url": "https://www.decathlon.fr/p/disque-de-musculation-fonte-20kg-28mm-compose-a-80-percent-de-fonte-recyclee/_/R-p-348941?mc=8816727",
+                    "image_path": "src/img/disque-de-musculation-fonte-20kg.avif",
+                    "prix": { "valeur": 40.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "bancs_muscu",
+            "nom": "Bancs de Musculation",
+            "description": "Le support essentiel pour le développé couché et les exercices assis.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/bancs-de-musculation/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8766093",
+                    "nom": "Banc de Musculation 900 (Inclinable)",
+                    "url": "https://www.decathlon.fr/p/banc-de-musculation-renforce-inclinable-et-declinable-bench-900/_/R-p-342936?mc=8766093",
+                    "image_path": "src/img/banc-de-musculation-renforce-inclinable-bench-900.avif",
+                    "prix": { "valeur": 130.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force"]
+                },
+                {
+                    "id": "8788244",
+                    "nom": "Banc de Musculation Pliable 100",
+                    "url": "https://www.decathlon.fr/p/banc-de-musculation-pliable-bench-100/_/R-p-344848?mc=8788244",
+                    "image_path": "src/img/banc-de-musculation-pliable-bench-100.avif",
+                    "prix": { "valeur": 60.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "debutant"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "dips",
+            "nom": "Barres à Dips",
+            "description": "Pour travailler les triceps et pectoraux au poids de corps.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/barres-paralleles-dips/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8882305",
+                    "nom": "Barres à Dips TS 100",
+                    "url": "https://www.decathlon.fr/p/barres-a-dips-reglables-et-compactes-ts-100/_/R-p-354940?mc=8882305",
+                    "image_path": "src/img/barres-a-dips-reglables-et-compactes-ts-100.avif",
+                    "prix": { "valeur": 60.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force", "calisthenics"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "traction",
+            "nom": "Barres de Traction & Chaises Romaines",
+            "description": "Équipement pour le dos et le haut du corps.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/barres-de-traction/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8588490",
+                    "nom": "Barre de traction porte (70cm)",
+                    "url": "https://www.decathlon.fr/p/barre-de-traction-pour-porte-avec-verrouillage-bt-150-70-cm/_/R-p-325833?mc=8588490",
+                    "image_path": "src/img/barre-de-traction-pour-porte-bt-150.avif",
+                    "prix": { "valeur": 25.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "prise_masse"]
+                },
+                {
+                    "id": "8385106",
+                    "nom": "Barre de traction murale repliable",
+                    "url": "https://www.decathlon.fr/p/barre-de-traction-murale-repliable/_/R-p-119673?mc=8385106&c=noir",
+                    "image_path": "src/img/barre-de-traction-murale-repliable.avif",
+                    "prix": { "valeur": 50.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force"]
+                },
+                {
+                    "id": "8766094",
+                    "nom": "Chaise Romaine (Training Station 900)",
+                    "url": "https://www.decathlon.fr/p/chaise-romaine-de-musculation-training-station-900/_/R-p-342926?mc=8766094",
+                    "image_path": "src/img/chaise-romaine-de-musculation-training-station-900.avif",
+                    "prix": { "valeur": 190.0, "devise": "EUR" },
+                    "tags_objectif": ["prise_masse", "force", "calisthenics"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "sangles_suspension",
+            "nom": "Sangles de Suspension",
+            "description": "Entraînement fonctionnel au poids de corps.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/sangle-de-suspension",
+            "produits": [
+                {
+                    "id": "8993381",
+                    "nom": "Sangles de Suspension Burn",
+                    "url": "https://www.decathlon.fr/p/sangles-de-suspension-burn/_/R-p-379149?mc=8993381",
+                    "image_path": "src/img/sangles-de-suspension-burn.avif",
+                    "prix": { "valeur": 20.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "gainage", "cardio"]
+                },
+                {
+                    "id": "8647670",
+                    "nom": "Kit poignées et accroche porte",
+                    "url": "https://www.decathlon.fr/p/kit-musculation-poignees-accroche-porte-et-elastique-15kg-kit-de-resistance/_/R-p-333917?mc=8647670",
+                    "image_path": "src/img/kit-musculation-poignees-accroche-porte.avif",
+                    "prix": { "valeur": 15.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "voyage"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "accessoires_glisse",
+            "nom": "Accessoires de Glisse",
+            "description": "Pour le renforcement et l'équilibre.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/accessoires-de-fitness/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8608703",
+                    "nom": "Disques de Glisse (x2)",
+                    "url": "https://www.decathlon.fr/p/disques-de-glisse-musculation-utilisables-sur-tous-les-sols-x2/_/R-p-171417?mc=8608703",
+                    "image_path": "src/img/disques-de-glisse-musculation.avif",
+                    "prix": { "valeur": 10.0, "devise": "EUR" },
+                    "tags_objectif": ["gainage", "renforcement"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "cordes_sauter",
+            "nom": "Cordes à Sauter",
+            "description": "L'incontournable du cardio.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/cordes-a-sauter/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8808880",
+                    "nom": "Corde à sauter 800 (Compteur)",
+                    "url": "https://www.decathlon.fr/p/corde-a-sauter-800-avec-double-compteur-noir/_/R-p-347914?mc=8808880",
+                    "image_path": "src/img/corde-a-sauter-800-avec-double-compteur.avif",
+                    "prix": { "valeur": 15.0, "devise": "EUR" },
+                    "tags_objectif": ["perte_poids", "cardio"]
+                },
+                {
+                    "id": "8861567",
+                    "nom": "Corde à sauter 500",
+                    "url": "https://www.decathlon.fr/p/corde-a-sauter-500-gomme/_/R-p-309793?mc=8861567&c=incolore",
+                    "image_path": "src/img/corde-a-sauter-500-gomme.avif",
+                    "prix": { "valeur": 5.0, "devise": "EUR" },
+                    "tags_objectif": ["perte_poids", "cardio"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "abdominaux",
+            "nom": "Roulette Abdominale",
+            "description": "Pour un gainage intense.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/roue-a-abdominaux/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8556755",
+                    "nom": "Roulette Abdominale (Ab Wheel)",
+                    "url": "https://www.decathlon.fr/p/roulette-abdominale-musculation-avec-ou-sans-elastique-de-guidage-ab-wheel-evo/_/R-p-311440?mc=8556755",
+                    "image_path": "src/img/roulette-abdominale-musculation.avif",
+                    "prix": { "valeur": 10.0, "devise": "EUR" },
+                    "tags_objectif": ["renforcement", "gainage"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "protection_corps",
+            "nom": "Accessoires de Protection",
+            "description": "Pour sécuriser vos mouvements lourds.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/accessoires-de-musculation/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8928388",
+                    "nom": "Ceinture Lombaire Cuir",
+                    "url": "https://www.decathlon.fr/p/ceinture-lombaire-de-musculation-en-cuir-resistante-noire/_/R-p-360592?mc=8928388&c=noir",
+                    "image_path": "src/img/ceinture-lombaire-de-musculation-en-cuir.avif",
+                    "prix": { "valeur": 30.0, "devise": "EUR" },
+                    "tags_objectif": ["force", "protection"]
+                },
+                {
+                    "id": "8916550",
+                    "nom": "Poignet de force",
+                    "url": "https://www.decathlon.fr/p/poignet-de-force-musculation-violet/_/R-p-324386?mc=8916550&c=vert",
+                    "image_path": "src/img/poignet-de-force-musculation.avif",
+                    "prix": { "valeur": 8.0, "devise": "EUR" },
+                    "tags_objectif": ["force", "protection"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "plyometrie_agilite",
+            "nom": "Plyométrie & Agilité",
+            "description": "Pour l'explosivité et le cardio training.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/accessoires-cross-training/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8581338",
+                    "nom": "Plyo Box Bois (3 hauteurs)",
+                    "url": "https://www.decathlon.fr/p/plyo-box-en-bois-3-hauteurs-40-50-60cm/_/R-p-324393?mc=8581338",
+                    "image_path": "src/img/plyo-box-en-bois-3-hauteurs.avif",
+                    "prix": { "valeur": 60.0, "devise": "EUR" },
+                    "tags_objectif": ["cardio", "explosivite", "perte_poids"]
+                },
+                {
+                    "id": "8581336",
+                    "nom": "Échelle de rythme (3.20m)",
+                    "url": "https://www.decathlon.fr/p/echelle-de-rythme-souple-longueur-3-20m/_/R-p-324391?mc=8581336",
+                    "image_path": "src/img/echelle-de-rythme-souple.avif",
+                    "prix": { "valeur": 10.0, "devise": "EUR" },
+                    "tags_objectif": ["cardio", "agilite"]
+                },
+                {
+                    "id": "8581340",
+                    "nom": "Lot de 6 cônes lestés",
+                    "url": "https://www.decathlon.fr/p/lot-de-6-cones-de-23-cm-lestes-et-modulables-orange/_/R-p-324395?mc=8581340",
+                    "image_path": "src/img/lot-de-6-cones-lestes-orange.avif",
+                    "prix": { "valeur": 15.0, "devise": "EUR" },
+                    "tags_objectif": ["agilite", "cardio"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "yoga_briques",
+            "nom": "Briques de Yoga",
+            "description": "Accessoire pour ajuster les postures.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/yoga/briques-de-yoga/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8577670",
+                    "nom": "Brique Yoga Liège",
+                    "url": "https://www.decathlon.fr/p/brique-de-yoga-en-liege/_/R-p-323475?mc=8577670&c=marron",
+                    "image_path": "src/img/brique-de-yoga-en-liege.avif",
+                    "prix": { "valeur": 8.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "souplesse"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "yoga_sangles",
+            "nom": "Sangles de Yoga",
+            "description": "Pour aider aux étirements.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/yoga/sangles-de-yoga/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8484480",
+                    "nom": "Sangle de Yoga (2.5m)",
+                    "url": "https://www.decathlon.fr/p/sangle-de-yoga-2-5-metres-bordeaux/_/R-p-183211?mc=8484480&c=blanc",
+                    "image_path": "src/img/sangle-de-yoga-2-5-metres.avif",
+                    "prix": { "valeur": 5.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "souplesse"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "yoga_coussins",
+            "nom": "Coussins & Bolsters",
+            "description": "Support pour la relaxation et le confort.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/yoga/zafu-coussins-de-yoga/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8649130",
+                    "nom": "Bolster Yoga",
+                    "url": "https://www.decathlon.fr/p/bolster-coussin-de-yoga-acajou/_/R-p-334442?mc=8649130&c=bleu",
+                    "image_path": "src/img/bolster-coussin-de-yoga.avif",
+                    "prix": { "valeur": 35.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "relaxation"]
+                }
+            ]
+        },
+        {
+            "id_categorie": "swiss_balls",
+            "nom": "Swiss Balls (Gym Ball)",
+            "description": "Ballon pour le Pilates, le stretching et le bureau.",
+            "url_categ": "https://www.decathlon.fr/tous-les-sports/pilates-gym-douce/swiss-ball/f-partner_decathlon",
+            "produits": [
+                {
+                    "id": "8640040",
+                    "nom": "Swiss Ball T2 (65cm)",
+                    "url": "https://www.decathlon.fr/p/gym-ball-taille-2-resistant-65-cm-bleu/_/R-p-328543?mc=8640040&c=rose_violet",
+                    "image_path": "src/img/gym-ball-taille-2-resistant-65-cm.avif",
+                    "prix": { "valeur": 15.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "gainage", "souplesse"]
+                },
+                {
+                    "id": "8640041",
+                    "nom": "Swiss Ball T3 (75cm)",
+                    "url": "https://www.decathlon.fr/p/gym-ball-taille-3-resistant-75-cm-bleu/_/R-p-328575?mc=8640041&c=rose_violet",
+                    "image_path": "src/img/gym-ball-taille-3-resistant-75-cm.avif",
+                    "prix": { "valeur": 17.0, "devise": "EUR" },
+                    "tags_objectif": ["bien_etre", "gainage", "souplesse"]
+                }
+            ]
+        }
+    ]
+}

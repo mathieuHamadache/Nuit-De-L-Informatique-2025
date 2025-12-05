@@ -1,0 +1,1 @@
+Il faut cliquer sur le Grinch en bas a droite de la page pour accéder au Snake

@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0f0f23; /* Bleu Nuit */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    background-color: #f2f2f2;
+}
