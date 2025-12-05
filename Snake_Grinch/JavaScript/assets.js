@@ -5,25 +5,25 @@ export const assets = {
     corps: new Image(),
     maisons: [],
     logo: new Image(),
-    musiqueMenu: new Audio("assets/musique/menu.mp3"),
-    musiqueGame: new Audio("assets/musique/game.mp3")
+    musiqueMenu: new Audio("../assets/musique/menu.mp3"),
+    musiqueGame: new Audio("../assets/musique/game.mp3")
 };
 
 // Initialisation
 assets.musiqueMenu.loop = true;
 assets.musiqueGame.loop = true;
 assets.musiqueMenu.volume = 0.5;
-assets.musiqueGame.volume = 0.4;
+assets.musiqueGame.volume = 0.4; // No change here, just for context
 
-assets.grinch.src = "assets/Grinch.png";
-assets.cadeau.src = "assets/Cadeau.png";
-assets.cadeau_doree.src = "assets/Cadeau_doree.png";
-assets.corps.src = "assets/Corps.png";
-assets.logo.src = "assets/Logo.png";
+assets.grinch.src = "../assets/Grinch.png";
+assets.cadeau.src = "../assets/Cadeau.png";
+assets.cadeau_doree.src = "../assets/Cadeau_doree.png";
+assets.corps.src = "../assets/Corps.png";
+assets.logo.src = "../assets/Logo.png";
 
 for(let i=1; i<=5; i++) {
     let img = new Image();
-    img.src = `assets/objets_template/maison${i}.png`;
+    img.src = `assets/objets_template/Maison${i}.png`;
     assets.maisons.push(img);
 }
 
